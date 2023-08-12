@@ -35,28 +35,17 @@ class Database:
     
     #add Mentor
     def addMentor(self, mentor: models.MentorInfo):
-        command = "EXEC sp_addMentor '%s', '%s', '%s'" % (mentor.fieldID, mentor.language, mentor.description)
-        try:
-            result = ""
-            self.cursor.execute(command)
-            for i in self.cursor:
-                result += i[0]
-            self.conn.commit()
-        except:
-            return "SOME ERRORS OCCUR"
+        command = "EXEC sp_addMentor '%s', '%s', '%s', '%s'" % (mentor.language, mentor.fieldID, mentor.description, mentor.rating)
+
+        self.cursor.execute(command)
+        self.conn.commit()
         return "SUCCESS"
     
     #delete Mentor
     def deleteMentor(self, mentorid):
-        command = "EXEC sp_deleteMentor '%s'" % (mentorid)
-        try:
-            result = ""
-            self.cursor.execute(command)
-            for i in self.cursor:
-                result += i[0]
-            self.conn.commit()
-        except:
-            return "SOME ERRORS OCCUR"
+        command = "EXEC sp_deleteMentor '"+str(mentorid)+"'"
+        self.cursor.execute(command)
+        self.conn.commit()
         return "SUCCESS"
 
 ###################################################################################################################
@@ -90,3 +79,6 @@ def addMentor(mentor: models.MentorInfo):
 @app.delete("/mentors/")
 def deleteMentor(mentorid):
     return database.deleteMentor(mentorid)
+
+mentor = models.MentorInfo(mentorID= "123456", fieldID= "1001", language= "English", description="Hello", rating = 1.5)
+print(database.addMentor(mentor))

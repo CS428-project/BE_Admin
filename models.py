@@ -33,7 +33,7 @@ class UserInfo(BaseModel):
 
 class MentorInfo(BaseModel):
     mentorID: str = "123456"
-    fieldID: str = "123456"
+    fieldID: int = 123456
     language: str = "English"
     description: str = "Hello"
     rating: float = 1.5
