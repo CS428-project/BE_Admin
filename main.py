@@ -30,7 +30,7 @@ class Database:
             return "SOME ERROR OCCUR"
         result = []
         for i in self.cursor:
-            result.append([x for x in i])
+            result.append({x for x in i})
         return result
     
     #add Mentor
@@ -79,6 +79,3 @@ def addMentor(mentor: models.MentorInfo):
 @app.delete("/mentors/")
 def deleteMentor(mentorid):
     return database.deleteMentor(mentorid)
-
-mentor = models.MentorInfo(mentorID= "123456", fieldID= "1001", language= "English", description="Hello", rating = 1.5)
-print(database.addMentor(mentor))
