@@ -35,7 +35,7 @@ class Database:
     
     #add Mentor
     def addMentor(self, mentor: models.MentorInfo):
-        command = "EXEC sp_addMentor '%s', '%s', '%s', '%s'" % (mentor.language, mentor.fieldID, mentor.description, mentor.rating)
+        command = "EXEC sp_InsertMentor '%s', '%s', '%s', '%s'" % (mentor.language, mentor.fieldID, mentor.description, mentor.rating)
 
         self.cursor.execute(command)
         self.conn.commit()
