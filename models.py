@@ -33,7 +33,7 @@ class UserInfo(BaseModel):
 
 class MentorInfo(BaseModel):
     mentorID: str = "123456"
-    fieldID: int = 123456
+    fieldID: str = "123456"
     language: str = "English"
     description: str = "Hello"
     rating: float = 1.5
@@ -48,13 +48,30 @@ class Experience(BaseModel):
     userID: str = "123456"
     position: str = "CEO"
     workplace: str = "Google"
-    startdate: str = "01-01-2023"
-    enddate: str = "01-01-2025"
+    old_job: str
+    years_experience: int
 
 class Booking(BaseModel):
-    ID: str = "123456"
     mentorID: str = "123456"
     menteeID: str = "123456"
     book_at: str = "01-01-2023"
     time: str = "07:59"
-    status: str = "0"
+    duration: float
+    status: str  # 'Completed', 'Confirmed', 'Pending', 'Canceled'
+    paymentID: int
+
+class Services(BaseModel):
+    mentorID: int
+    cost: float
+    fieldID: int
+    information: str
+    work_time: str
+
+class Feedback(BaseModel):
+    bookingID: int
+    feedback: str
+    rate: float
+
+class Payment(BaseModel):
+    ID: int
+    method: str
